@@ -4,20 +4,18 @@ import com.gitlab.rmarzec.framework.utils.DriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
 import java.util.List;
 
 
 public class Task2Test {
+    DriverFactory driverFactory = new DriverFactory();
+    WebDriver webDriver = driverFactory.initDriver();
     @Test
-    public void Task2Test(){
+    public void Task2Test() {
 
-        DriverFactory driverFactory = new DriverFactory();
-        WebDriver webDriver = driverFactory.initDriver();
         webDriver.get("https://pl.wikipedia.org/wiki/Wiki");
         webDriver.findElement(By.id("p-lang-btn-checkbox")).click();
         WebElement element = webDriver.findElement(By.xpath(".//*[@class='row uls-language-list uls-lcd']"));
@@ -30,6 +28,9 @@ public class Task2Test {
             }
             System.out.println(language.getText());
         }
+    }
+    @AfterTest
+    public void cleanUp() {
         webDriver.quit();
     }
 }
