@@ -3,7 +3,6 @@ package com.gitlab.rmarzec.task;
 import com.gitlab.rmarzec.framework.utils.DriverFactory;
 import com.gitlab.rmarzec.model.YTTile;
 import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -14,7 +13,6 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.awt.SystemColor.window;
 import static java.lang.Thread.sleep;
 
 
@@ -36,9 +34,9 @@ public class Task4Test {
         sleep(2000);
         webDriver.findElement(By.xpath("//ytd-button-renderer[2]")).click();
         sleep(2000);
-       List<WebElement> elements = webDriver.findElements(By.xpath("//ytd-rich-item-renderer"));
+        List<WebElement> elements = webDriver.findElements(By.xpath("//ytd-rich-item-renderer"));
 
-        while (ytTileList.size()<12) {
+        while (ytTileList.size() < 12) {
 
             WebElement element = elements.get(i);
             i++;
@@ -47,7 +45,7 @@ public class Task4Test {
             String chanelTitle = getChanelTitle(element);
             String videoLength = getVideoLength(element);
 
-            if(chanelTitle.equals("Short"))
+            if (chanelTitle.equals("Short"))
                 continue;
             ytTileList.add(new YTTile(
                     videoTitle,
@@ -56,12 +54,13 @@ public class Task4Test {
             ));
         }
 
-        for(YTTile ytTile : ytTileList) {
-            if(!ytTile.getLength().equals("Live")) {
-                System.out.println(ytTile.getTitle() + " length is " + ytTile.getLength() );
+        for (YTTile ytTile : ytTileList) {
+            if (!ytTile.getLength().equals("Live")) {
+                System.out.println(ytTile.getTitle() + " length is " + ytTile.getLength());
             }
         }
     }
+
     @AfterTest
     public void cleanUp() {
         webDriver.quit();

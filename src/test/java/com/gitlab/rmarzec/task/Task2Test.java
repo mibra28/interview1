@@ -21,7 +21,7 @@ public class Task2Test {
         WebElement element = webDriver.findElement(By.xpath(".//*[@class='row uls-language-list uls-lcd']"));
         List<WebElement> languages = element.findElements(By.tagName("li"));
 
-        for(WebElement language : languages) {
+        for (WebElement language : languages) {
             if(language.getText().equals("English")) {
                 String href = language.findElement(By.tagName("a")).getAttribute("href");
                 System.out.println(language.getText() + " Url: " + href);
