@@ -9,6 +9,8 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static com.gitlab.rmarzec.constants.Urls.WIKI;
+
 
 public class Task2Test {
     DriverFactory driverFactory = new DriverFactory();
@@ -16,7 +18,7 @@ public class Task2Test {
     @Test
     public void Task2Test() {
 
-        webDriver.get("https://pl.wikipedia.org/wiki/Wiki");
+        webDriver.get(WIKI);
         webDriver.findElement(By.id("p-lang-btn-checkbox")).click();
         WebElement element = webDriver.findElement(By.xpath(".//*[@class='row uls-language-list uls-lcd']"));
         List<WebElement> languages = element.findElements(By.tagName("li"));

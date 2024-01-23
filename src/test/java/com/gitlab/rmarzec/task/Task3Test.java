@@ -12,6 +12,8 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.gitlab.rmarzec.constants.Urls.GOOGLE;
+import static com.gitlab.rmarzec.constants.Urls.W3SCHOOLS;
 import static java.lang.Thread.sleep;
 
 public class Task3Test {
@@ -21,7 +23,7 @@ public class Task3Test {
     @Test
     public void Task3Test() throws InterruptedException {
 
-        webDriver.get("https://www.google.com/");
+        webDriver.get(GOOGLE);
         sleep(2000);
 
         webDriver.findElement(By.id("W0wltc")).click();
@@ -31,9 +33,9 @@ public class Task3Test {
         webDriver.findElement(By.name("btnI")).click();
         sleep(2000);
 
-        if (!webDriver.getCurrentUrl().equals("https://www.w3schools.com/tags/tag_select.asp")) {
+        if (!webDriver.getCurrentUrl().equals(W3SCHOOLS)) {
             System.out.println("Current address: " + webDriver.getCurrentUrl());
-            webDriver.get("https://www.w3schools.com/tags/tag_select.asp");
+            webDriver.get(W3SCHOOLS);
         }
 
         webDriver.findElement(By.id("accept-choices")).click();

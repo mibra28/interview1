@@ -13,24 +13,22 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.gitlab.rmarzec.constants.Urls.YOUTUBE;
 import static java.lang.Thread.sleep;
 
 
 public class Task4Test {
     DriverFactory driverFactory = new DriverFactory();
     WebDriver webDriver = driverFactory.initDriver();
-
     Wait<WebDriver> wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
-    List<YTTile> ytTileList = new ArrayList<YTTile>();
-
-    JavascriptExecutor js = (JavascriptExecutor) webDriver;
-
+    List<YTTile> ytTileList = new ArrayList<>();
+    JavascriptExecutor javascriptExecutor = (JavascriptExecutor) webDriver;
+    int i = 0;
 
     @Test
     public void Task4Test() throws InterruptedException {
-        int i = 0;
 
-        webDriver.get("https://www.youtube.com/");
+        webDriver.get(YOUTUBE);
         sleep(2000);
         webDriver.findElement(By.xpath("//ytd-button-renderer[2]")).click();
         sleep(2000);
@@ -40,7 +38,7 @@ public class Task4Test {
 
             WebElement element = elements.get(i);
             i++;
-            js.executeScript("arguments[0].scrollIntoView();", element);
+            javascriptExecutor.executeScript("arguments[0].scrollIntoView();", element);
             String videoTitle = getVideoTitle(element);
             String chanelTitle = getChanelTitle(element);
             String videoLength = getVideoLength(element);

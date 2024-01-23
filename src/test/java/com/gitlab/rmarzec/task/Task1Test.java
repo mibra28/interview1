@@ -8,6 +8,8 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static com.gitlab.rmarzec.constants.Urls.ONET;
+
 
 public class Task1Test {
 
@@ -15,6 +17,6 @@ public class Task1Test {
     public void Task1Test(){
         DriverFactory driverFactory = new DriverFactory();
         WebDriver webDriver = driverFactory.initDriver();
-        webDriver.get("https://www.onet.pl/");
+        webDriver.get(ONET);
     }
 }
