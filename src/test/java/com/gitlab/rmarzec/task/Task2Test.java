@@ -1,7 +1,7 @@
 package com.gitlab.rmarzec.task;
 
 import com.gitlab.rmarzec.framework.utils.DriverFactory;
-import org.openqa.selenium.By;
+import com.gitlab.rmarzec.pages.wikipedia.WikiPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterTest;
@@ -15,22 +15,22 @@ import static com.gitlab.rmarzec.constants.Urls.WIKI;
 public class Task2Test {
     DriverFactory driverFactory = new DriverFactory();
     WebDriver webDriver = driverFactory.initDriver();
+    WikiPage wikiPage = new WikiPage(webDriver);
+
     @Test
     public void Task2Test() {
+        wikiPage.openHomePage();
+        wikiPage.clickOnLanguageButton();
+        List<WebElement> allLanguages = wikiPage.getAllLanguages();
 
-        webDriver.get(WIKI);
-        webDriver.findElement(By.id("p-lang-btn-checkbox")).click();
-        WebElement element = webDriver.findElement(By.xpath(".//*[@class='row uls-language-list uls-lcd']"));
-        List<WebElement> languages = element.findElements(By.tagName("li"));
-
-        for (WebElement language : languages) {
-            if(language.getText().equals("English")) {
-                String href = language.findElement(By.tagName("a")).getAttribute("href");
-                System.out.println(language.getText() + " Url: " + href);
+        for (WebElement language : allLanguages) {
+            if (language.getText().equals("English")) {
+                System.out.println(language.getText() + " Url: " + wikiPage.getHref(language));
             }
             System.out.println(language.getText());
         }
     }
+
     @AfterTest
     public void cleanUp() {
         webDriver.quit();
