@@ -25,10 +25,6 @@ public class WaitFactory {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
-    public WebElement waitForVisibility(WebElement webElement) {
-        return wait.until(ExpectedConditions.visibilityOf(webElement));
-    }
-
     public List<WebElement> waitForAllElements(By locator) {
         return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
     }

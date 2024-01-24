@@ -35,7 +35,7 @@ public class YoutubePage {
     }
 
     public List<WebElement> getVideos() {
-        return wait.waitForAllElements((videoElement));
+        return wait.waitForAllElements(videoElement);
     }
 
     public String getVideoTitle(WebElement element) {

@@ -37,7 +37,7 @@ public class WikiPage {
     }
 
     public String getHref(WebElement element) {
-        return wait.waitForVisibility(element.findElement(href)).getAttribute("href");
+        return wait.waitForChild(element, href).getAttribute("href");
     }
 
     public void printLanguages(List<WebElement> webElements) {
