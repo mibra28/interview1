@@ -55,11 +55,8 @@ public class YoutubePage {
     }
 
     public List<YTTile> getYTTiles(List<WebElement> elementList) {
-        int i = 0;
         List<YTTile> ytTileList = new ArrayList<>();
-        while (ytTileList.size() < 12) {
-            WebElement element = elementList.get(i);
-            i++;
+        for (WebElement element : elementList) {
             javascriptExecutor.executeScript("arguments[0].scrollIntoView();", element);
             ytTileList.add(new YTTile(getVideoTitle(element), getChanelTitle(element), getVideoLength(element)));
         }
