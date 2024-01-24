@@ -4,9 +4,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.lang.reflect.InvocationTargetException;
 import java.time.Duration;
 import java.util.List;
 
@@ -18,15 +16,14 @@ public class WaitFactory {
     public WaitFactory(WebDriver driver) {
         this.driver = driver;
         this.wait = new FluentWait<>(driver)
-                .withTimeout(Duration.ofSeconds(5))
+                .withTimeout(Duration.ofSeconds(6))
                 .pollingEvery(Duration.ofMillis(300));
     }
 
     public WebElement waitForVisibility(By locator) {
         try {
             return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-        } catch (NoSuchElementException | TimeoutException e) {
-            System.out.println("Element is not found by locator");
+        } catch (NoSuchElementException e) {
             return null;
         }
     }
@@ -34,19 +31,25 @@ public class WaitFactory {
     public WebElement waitForVisibility(WebElement webElement) {
         try {
             return wait.until(ExpectedConditions.visibilityOf(webElement));
-        } catch (NoSuchElementException | TimeoutException e) {
-            System.out.println("Element is not found by WebElement");
+        } catch (NoSuchElementException e) {
             return null;
         }
     }
 
-    public Boolean isVisible(WebElement webElement) {
+    public List<WebElement> waitForAllElements(By locator) {
         try {
-            wait.until(ExpectedConditions.visibilityOf(webElement));
-            return true;
+            return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
+        } catch (NoSuchElementException e) {
+            return null;
+        }
+    }
+
+    public WebElement waitForChild(WebElement parent, By childLocator) {
+        try {
+            List<WebElement> until = wait.until(ExpectedConditions.visibilityOfNestedElementsLocatedBy(parent, childLocator));
+            return until.get(0);
         } catch (NoSuchElementException | TimeoutException e) {
-            System.out.println("Element is not found by WebElement");
-            return false;
+            return null;
         }
     }
 }

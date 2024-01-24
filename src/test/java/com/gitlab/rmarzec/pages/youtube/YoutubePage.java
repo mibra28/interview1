@@ -1,11 +1,13 @@
 package com.gitlab.rmarzec.pages.youtube;
 
-import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import com.gitlab.rmarzec.framework.utils.WaitFactory;
+import com.gitlab.rmarzec.model.YTTile;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
-import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.gitlab.rmarzec.constants.Urls.YOUTUBE;
@@ -13,44 +15,55 @@ import static com.gitlab.rmarzec.constants.Urls.YOUTUBE;
 public class YoutubePage {
 
     WebDriver driver;
-    Wait<WebDriver> wait;
-
+    WaitFactory wait;
+    JavascriptExecutor javascriptExecutor;
 
     public YoutubePage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        this.javascriptExecutor = (JavascriptExecutor) driver;
+        this.wait = new WaitFactory(driver);
     }
 
     private final By acceptCookiesButton = By.xpath("//ytd-button-renderer[2]");
     private final By videoTitle = By.id("video-title");
     private final By chanelTitle = By.className("ytd-channel-name");
     private final By timeStatus = By.id("time-status");
-    private final By liveBadge = By.xpath("//*[@id=\"meta\"]/ytd-badge-supported-renderer[1]/div");
     private final By videoElement = By.xpath("//ytd-rich-grid-row//child::ytd-rich-item-renderer");
 
     public void acceptCookiesButton() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(acceptCookiesButton)).click();
+        wait.waitForVisibility((acceptCookiesButton)).click();
     }
 
     public List<WebElement> getVideos() {
-       return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(videoElement));
+        return wait.waitForAllElements((videoElement));
     }
 
     public String getVideoTitle(WebElement element) {
-         return element.findElement(videoTitle).getText();
+        return wait.waitForVisibility(element.findElement(videoTitle)).getText();
     }
 
     public String getVideoLength(WebElement element) {
-
-        try {
-            return wait.until(ExpectedConditions.presenceOfNestedElementLocatedBy(element, timeStatus)).getText();
-        } catch (TimeoutException | NoSuchElementException e) {
+        WebElement timeStatusElement = wait.waitForChild(element, timeStatus);
+        if (timeStatusElement == null) {
             return "Live";
         }
+        return timeStatusElement.getText();
     }
 
     public String getChanelTitle(WebElement element) {
-        return element.findElement(chanelTitle).getText();
+        return wait.waitForVisibility(element.findElement(chanelTitle)).getText();
+    }
+
+    public List<YTTile> getYTTiles(List<WebElement> elementList) {
+        int i = 0;
+        List<YTTile> ytTileList = new ArrayList<>();
+        while (ytTileList.size() < 12) {
+            WebElement element = elementList.get(i);
+            i++;
+            javascriptExecutor.executeScript("arguments[0].scrollIntoView();", element);
+            ytTileList.add(new YTTile(getVideoTitle(element), getChanelTitle(element), getVideoLength(element)));
+        }
+        return ytTileList;
     }
 
     public void openHomePage() {

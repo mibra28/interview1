@@ -33,8 +33,7 @@ public class WikiPage {
     }
 
     public WebElement getSingleLanguage(List<WebElement> languageList, String language) {
-        return languageList.stream()
-                .filter(lang -> lang.getText().equals(language)).findFirst().orElse(null);
+        return languageList.stream().filter(lang -> lang.getText().equals(language)).findFirst().orElse(null);
     }
 
     public String getHref(WebElement element) {
