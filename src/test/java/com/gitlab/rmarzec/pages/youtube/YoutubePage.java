@@ -39,7 +39,11 @@ public class YoutubePage {
     }
 
     public String getVideoTitle(WebElement element) {
-        return wait.waitForVisibility(element.findElement(videoTitle)).getText();
+        WebElement titleElement = wait.waitForChild(element, videoTitle);
+        if (titleElement == null) {
+            return "Unexpected commercial";
+        }
+        return titleElement.getText();
     }
 
     public String getVideoLength(WebElement element) {
@@ -51,7 +55,11 @@ public class YoutubePage {
     }
 
     public String getChanelTitle(WebElement element) {
-        return wait.waitForVisibility(element.findElement(chanelTitle)).getText();
+        WebElement chanelTitleElement = wait.waitForChild(element, chanelTitle);
+        if (chanelTitleElement == null) {
+            return "Unexpected commercial";
+        }
+        return chanelTitleElement.getText();
     }
 
     public List<YTTile> getYTTiles(List<WebElement> elementList) {

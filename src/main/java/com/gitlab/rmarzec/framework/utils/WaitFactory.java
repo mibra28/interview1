@@ -15,31 +15,22 @@ public class WaitFactory {
 
     public WaitFactory(WebDriver driver) {
         this.driver = driver;
-        this.wait = new FluentWait<>(driver).withTimeout(Duration.ofSeconds(6)).pollingEvery(Duration.ofMillis(300));
+        this.wait = new FluentWait<>(driver).withTimeout(Duration.ofSeconds(6))
+                .pollingEvery(Duration.ofMillis(300))
+                .ignoring(NoSuchElementException.class)
+                .ignoring(TimeoutException.class);
     }
 
     public WebElement waitForVisibility(By locator) {
-        try {
-            return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-        } catch (NoSuchElementException e) {
-            return null;
-        }
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
     public WebElement waitForVisibility(WebElement webElement) {
-        try {
-            return wait.until(ExpectedConditions.visibilityOf(webElement));
-        } catch (NoSuchElementException e) {
-            return null;
-        }
+        return wait.until(ExpectedConditions.visibilityOf(webElement));
     }
 
     public List<WebElement> waitForAllElements(By locator) {
-        try {
-            return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
-        } catch (NoSuchElementException e) {
-            return null;
-        }
+        return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
     }
 
     public WebElement waitForChild(WebElement parent, By childLocator) {
