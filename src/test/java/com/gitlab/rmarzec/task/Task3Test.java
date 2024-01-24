@@ -19,8 +19,7 @@ public class Task3Test {
     W3SchoolsEditorPage w3SchoolsEditorPage = new W3SchoolsEditorPage(webDriver);
 
     @Test
-    public void Task3Test() {
-
+    public void checkValueForSelectedOption() {
         googlePage.openHomePage();
         googlePage.clickAcceptCookiesButton();
         googlePage.inputSearchedText("HTML select tag - W3Schools");

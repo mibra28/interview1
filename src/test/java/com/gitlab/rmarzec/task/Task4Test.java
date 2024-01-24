@@ -18,7 +18,7 @@ public class Task4Test {
     YoutubePage youtubePage = new YoutubePage(webDriver);
 
     @Test
-    public void Task4Test() {
+    public void checkFirst12Videos() {
         youtubePage.openHomePage();
         youtubePage.acceptCookiesButton();
         List<WebElement> allVideos = youtubePage.getVideos();

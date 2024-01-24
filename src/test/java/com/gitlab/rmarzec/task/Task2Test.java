@@ -18,7 +18,7 @@ public class Task2Test {
     WikiPage wikiPage = new WikiPage(webDriver);
 
     @Test
-    public void Task2Test() {
+    public void checkUrlForEnglishLanguage() {
         wikiPage.openHomePage();
         wikiPage.clickOnLanguageButton();
         List<WebElement> allLanguages = wikiPage.getAllLanguages();

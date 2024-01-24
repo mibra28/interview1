@@ -14,7 +14,7 @@ public class Task1Test {
     WebDriver webDriver = driverFactory.initDriver();
 
     @Test
-    public void Task1Test() {
+    public void checkThatOnetIsOpened() {
         webDriver.get(ONET);
         assertEquals(webDriver.getCurrentUrl(), ONET);
     }
