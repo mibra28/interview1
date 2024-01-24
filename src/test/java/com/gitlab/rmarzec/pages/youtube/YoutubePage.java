@@ -28,7 +28,7 @@ public class YoutubePage {
     private final By videoTitle = By.id("video-title");
     private final By chanelTitle = By.className("ytd-channel-name");
     private final By timeStatus = By.id("time-status");
-    private final By videoElement = By.xpath("//ytd-rich-grid-row//child::ytd-rich-item-renderer");
+    private final By videoElement = By.xpath("(//ytd-rich-grid-row//child::ytd-rich-item-renderer)[position()<13]");
 
     public void acceptCookiesButton() {
         wait.waitForVisibility((acceptCookiesButton)).click();
