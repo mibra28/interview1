@@ -43,7 +43,7 @@ public class WikiPage {
     public void printLanguages(List<WebElement> webElements) {
         for (WebElement language : webElements) {
             if (language.getText().equals("English")) {
-                System.out.println(language.getText() + " Url: " + getHref(language));
+                System.out.printf("For %s url is: %s", language.getText(), getHref(language));
             }
             System.out.println(language.getText());
         }
