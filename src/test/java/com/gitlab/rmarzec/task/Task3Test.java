@@ -9,17 +9,17 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 
 import static com.gitlab.rmarzec.constants.Urls.W3SCHOOLS;
+import static org.testng.AssertJUnit.assertEquals;
 
 public class Task3Test {
     DriverFactory driverFactory = new DriverFactory();
     WebDriver webDriver = driverFactory.initDriver();
-
     GooglePage googlePage = new GooglePage(webDriver);
     W3SchoolsPage w3SchoolsPage = new W3SchoolsPage(webDriver);
     W3SchoolsEditorPage w3SchoolsEditorPage = new W3SchoolsEditorPage(webDriver);
 
     @Test
-    public void Task3Test() throws InterruptedException {
+    public void Task3Test() {
 
         googlePage.openHomePage();
         googlePage.clickAcceptCookiesButton();
@@ -34,10 +34,10 @@ public class Task3Test {
         w3SchoolsPage.clickAcceptCookiesButton();
         w3SchoolsPage.clickTryYourselfButton();
         w3SchoolsEditorPage.switchToIframeResults();
-        System.out.println(w3SchoolsEditorPage.getHeaderText());
-        w3SchoolsEditorPage.selectCarInDropdown("Opel");
+        w3SchoolsEditorPage.printHeader();
+        String value = w3SchoolsEditorPage.getSelectedValue("Opel");
+        assertEquals("opel", value);
     }
-
 
     @AfterTest
     public void cleanUp() {

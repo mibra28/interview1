@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.lang.reflect.InvocationTargetException;
 import java.time.Duration;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class WaitFactory {
     public WaitFactory(WebDriver driver) {
         this.driver = driver;
         this.wait = new FluentWait<>(driver)
-                .withTimeout(Duration.ofSeconds(10))
+                .withTimeout(Duration.ofSeconds(5))
                 .pollingEvery(Duration.ofMillis(300));
     }
 
@@ -39,4 +40,13 @@ public class WaitFactory {
         }
     }
 
+    public Boolean isVisible(WebElement webElement) {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(webElement));
+            return true;
+        } catch (NoSuchElementException | TimeoutException e) {
+            System.out.println("Element is not found by WebElement");
+            return false;
+        }
+    }
 }

@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.gitlab.rmarzec.constants.Urls.WIKI;
+import static org.testng.AssertJUnit.assertEquals;
 
 
 public class Task2Test {
@@ -22,13 +22,9 @@ public class Task2Test {
         wikiPage.openHomePage();
         wikiPage.clickOnLanguageButton();
         List<WebElement> allLanguages = wikiPage.getAllLanguages();
-
-        for (WebElement language : allLanguages) {
-            if (language.getText().equals("English")) {
-                System.out.println(language.getText() + " Url: " + wikiPage.getHref(language));
-            }
-            System.out.println(language.getText());
-        }
+        wikiPage.printLanguages(allLanguages);
+        String url = wikiPage.getHref(wikiPage.getSingleLanguage(allLanguages, "English"));
+        assertEquals(url, "https://en.wikipedia.org/wiki/Wiki");
     }
 
     @AfterTest

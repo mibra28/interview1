@@ -23,8 +23,8 @@ public class W3SchoolsEditorPage {
     private final By selectElement = By.id("cars");
     private final By header = By.tagName("h1");
 
-    public String getHeaderText() {
-        return wait.waitForVisibility(header).getText();
+    public void printHeader() {
+        System.out.println(wait.waitForVisibility(header).getText());
     }
 
     public void switchToIframeResults() {
@@ -38,11 +38,13 @@ public class W3SchoolsEditorPage {
         return wait.waitForVisibility(selectElement);
     }
 
-    public void selectCarInDropdown(String option) {
+    public String getSelectedValue(String optionToSelect) {
         Select select = new Select(getSelectElement());
-        select.selectByVisibleText(option);
+        select.selectByVisibleText(optionToSelect);
         WebElement selectedOption = select.getFirstSelectedOption();
-        System.out.println(selectedOption.getText() + ", " + selectedOption.getAttribute("value"));
+        String value = selectedOption.getAttribute("value");
+        System.out.println(selectedOption.getText() + ", " + value);
+        return value;
     }
 
 }

@@ -1,22 +1,26 @@
 package com.gitlab.rmarzec.task;
 
 import com.gitlab.rmarzec.framework.utils.DriverFactory;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
 import static com.gitlab.rmarzec.constants.Urls.ONET;
+import static org.testng.AssertJUnit.assertEquals;
 
 
 public class Task1Test {
+    DriverFactory driverFactory = new DriverFactory();
+    WebDriver webDriver = driverFactory.initDriver();
 
     @Test
-    public void Task1Test(){
-        DriverFactory driverFactory = new DriverFactory();
-        WebDriver webDriver = driverFactory.initDriver();
+    public void Task1Test() {
         webDriver.get(ONET);
+        assertEquals(webDriver.getCurrentUrl(), ONET);
+    }
+
+    @AfterTest
+    public void cleanUp() {
+        webDriver.quit();
     }
 }

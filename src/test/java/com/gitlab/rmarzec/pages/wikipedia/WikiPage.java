@@ -32,8 +32,22 @@ public class WikiPage {
         return wait.waitForVisibility(languageListContainer).findElements(language);
     }
 
+    public WebElement getSingleLanguage(List<WebElement> languageList, String language) {
+        return languageList.stream()
+                .filter(lang -> lang.getText().equals(language)).findFirst().orElse(null);
+    }
+
     public String getHref(WebElement element) {
         return wait.waitForVisibility(element.findElement(href)).getAttribute("href");
+    }
+
+    public void printLanguages(List<WebElement> webElements) {
+        for (WebElement language : webElements) {
+            if (language.getText().equals("English")) {
+                System.out.println(language.getText() + " Url: " + getHref(language));
+            }
+            System.out.println(language.getText());
+        }
     }
 
     public void openHomePage() {
