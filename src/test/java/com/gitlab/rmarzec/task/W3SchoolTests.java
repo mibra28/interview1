@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 import static com.gitlab.rmarzec.constants.Urls.W3SCHOOLS;
 import static org.testng.AssertJUnit.assertEquals;
 
-public class Task3Test {
+public class W3SchoolTests {
     DriverFactory driverFactory = new DriverFactory();
     WebDriver webDriver = driverFactory.initDriver();
     GooglePage googlePage = new GooglePage(webDriver);

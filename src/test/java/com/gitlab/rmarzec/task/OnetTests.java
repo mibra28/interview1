@@ -9,7 +9,7 @@ import static com.gitlab.rmarzec.constants.Urls.ONET;
 import static org.testng.AssertJUnit.assertEquals;
 
 
-public class Task1Test {
+public class OnetTests {
     DriverFactory driverFactory = new DriverFactory();
     WebDriver webDriver = driverFactory.initDriver();
 

@@ -12,7 +12,7 @@ import java.util.List;
 import static org.testng.AssertJUnit.assertEquals;
 
 
-public class Task2Test {
+public class WikiTests {
     DriverFactory driverFactory = new DriverFactory();
     WebDriver webDriver = driverFactory.initDriver();
     WikiPage wikiPage = new WikiPage(webDriver);

@@ -12,7 +12,7 @@ import java.util.List;
 
 import static org.testng.AssertJUnit.assertEquals;
 
-public class Task4Test {
+public class YoutubeTests {
     DriverFactory driverFactory = new DriverFactory();
     WebDriver webDriver = driverFactory.initDriver();
     YoutubePage youtubePage = new YoutubePage(webDriver);
