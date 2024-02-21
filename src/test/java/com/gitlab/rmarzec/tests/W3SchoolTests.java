@@ -1,4 +1,4 @@
-package com.gitlab.rmarzec.task;
+package com.gitlab.rmarzec.tests;
 
 import com.gitlab.rmarzec.framework.utils.DriverFactory;
 import com.gitlab.rmarzec.pages.google.GooglePage;

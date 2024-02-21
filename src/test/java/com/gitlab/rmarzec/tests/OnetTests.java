@@ -1,4 +1,4 @@
-package com.gitlab.rmarzec.task;
+package com.gitlab.rmarzec.tests;
 
 import com.gitlab.rmarzec.framework.utils.DriverFactory;
 import org.openqa.selenium.WebDriver;
